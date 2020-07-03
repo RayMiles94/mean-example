@@ -15,6 +15,8 @@ app.use(helmet());
 app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json());
 
+var Somme = mongoose.model('Somme', require('./shema'), 'somme');
+
 app.get('/',require('./page'));
 
 app.get('/api', function (req, res) {
@@ -25,7 +27,6 @@ app.get('/api', function (req, res) {
 });
 
 app.get('/api/cal', function(req, res) {
-    var Somme = mongoose.model('Somme', require('./shema'), 'somme');
     if(req.query!={}) {
         const s = parseInt(req.query.a) + parseInt(req.query.b);
         Somme.collection.insert({ resulat: s  }, function (err, docs) {
@@ -48,7 +49,6 @@ app.get('/api/cal', function(req, res) {
 });
 
 app.get('/api/find', function (req, res) {
-    var Somme = mongoose.model('Somme', require('./shema'), 'somme');
     Somme.find({}, function (err, docs) {
         res.json(docs);
     });
