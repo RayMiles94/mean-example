@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 import { HttpClient, HttpParams} from '@angular/common/http';
 
 @Component({
@@ -6,7 +6,8 @@ import { HttpClient, HttpParams} from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements  OnInit{
+
   title = 'mean-front';
   a:string;
   b:string;
@@ -14,9 +15,14 @@ export class AppComponent {
   iscal:boolean = true;
   list:any[];
 
+  ngOnInit(): void {
+    document.title = "MERN EXAMPLE";
+  }
+
   constructor(private httpclient:HttpClient) {
     this.GetList();
   }
+  
 
   private GetList(): void {
     this.httpclient.get<any>('http://0.0.0.0:3500/api/find/').subscribe(
@@ -26,7 +32,7 @@ export class AppComponent {
     );
   }
 
-  public onCalcul() {
+  public onCalcul(): void {
     let params = new HttpParams();
     params = params.append('a', this.a);
     params = params.append('b', this.b);
@@ -47,7 +53,7 @@ export class AppComponent {
     );
   }
 
-  public onNew() {
+  public onNew(): void {
     this.a = this.b =  '';
     this.iscal=true;
   }

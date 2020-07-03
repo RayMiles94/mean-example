@@ -9,6 +9,7 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUnifiedTopology: true});
 
+app.use(express.static('public'));
 app.use(morgan());
 app.use(cors());
 app.use(helmet());
@@ -17,7 +18,7 @@ app.use(bodyparser.json());
 
 var Somme = mongoose.model('Somme', require('./shema'), 'somme');
 
-app.get('/',require('./page'));
+app.get('/page',require('./page'));
 
 app.get('/api', function (req, res) {
     res.status(200).json({
