@@ -1,0 +1,20 @@
+<div>
+  <input type="text" name="a" id="a" [(ngModel)]="a"><br/>
+  <input type="text" name="b" id="b" [(ngModel)]="b"><br/>
+  <button type="button" (click)="onCalcul()">Calcul</button>
+  <button *ngIf="!iscal" type="button" (click)="onNew()">New</button>
+  <div *ngIf="!iscal">{{ data }}</div>
+</div>
+<br/>
+<div>
+  <table >
+    <tr >
+      <td>ID</td>
+      <td>resulat</td>
+    </tr>
+    <tr *ngFor="let d of list" >
+      <td>{{  d._id }}</td>
+      <td>{{ d.resulat }}</td>
+    </tr>
+  </table>
+</div>
