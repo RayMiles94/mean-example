@@ -3,6 +3,7 @@
   <input type="text" name="b" id="b" [(ngModel)]="b" class="form-control"><br/>
   <button type="button" (click)="onCalcul()" class="btn btn-primary">Calcul</button>
   <button *ngIf="!iscal" type="button" (click)="onNew()" class="btn btn-primary">New</button>
+  <button type="button" class="btn btn-primary" (click)="onRemove()">Delete all</button>
   <div *ngIf="!iscal">{{ data }}</div>
 </div>
 <br/>

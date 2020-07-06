@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const config =  require('typescript-text-config');
+const global = new config.TextConfig("config.txt");
 
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
@@ -55,11 +57,17 @@ app.get('/api/find', function (req, res) {
     });
 });
 
+app.get('/api/remove', function (req, res) {
+   Somme.remove({}, function (err, docs) {
+       res.json(docs);
+   });
+});
+
 
 const http = require('http');
 
 const server = http.createServer(app);
 
-server.listen(3500, () => {
+server.listen(parseInt(global.getItem('port')), () => {
     console.log("server is workin fine")
 });

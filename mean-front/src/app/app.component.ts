@@ -1,5 +1,6 @@
 import { Component , OnInit} from '@angular/core';
 import { HttpClient, HttpParams} from '@angular/common/http';
+import { environment } from '../../src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent implements  OnInit{
   
 
   private GetList(): void {
-    this.httpclient.get<any>('http://0.0.0.0:3500/api/find/').subscribe(
+    this.httpclient.get<any>(environment.backend +  '/api/find/').subscribe(
       data => {
         this.list =data;
       }
@@ -36,7 +37,7 @@ export class AppComponent implements  OnInit{
     let params = new HttpParams();
     params = params.append('a', this.a);
     params = params.append('b', this.b);
-    this.httpclient.get<any>('http://0.0.0.0:3500/api/cal', {
+    this.httpclient.get<any>(environment.backend +  '/api/cal', {
      params: params
     }).subscribe(
       data => {
@@ -57,4 +58,14 @@ export class AppComponent implements  OnInit{
     this.a = this.b =  '';
     this.iscal=true;
   }
+
+  public onRemove():void {
+    this.httpclient.get<any>(environment.backend + '/api/remove')
+    .subscribe(
+      data => {
+        this.GetList();  
+      }
+    );
+  }
+
 }
